@@ -38,6 +38,7 @@
 
     <transactions-table v-if="!loading && null !== contract"
                         @afterConfirm="load"
+                        @afterCreate="load"
                         :address="$route.params.address"
                         :items="transactions"
                         :i-custodian="amICustodian"
@@ -104,7 +105,7 @@ export default {
         if (!utils.isAddressValid(this.$route.params.address)) {
           throw 'Address is not valid.';
         }
-        this.addToInfoTable('Address', 'addr', utils.addressToView(this.$route.params.address));
+        this.addToInfoTable('Address', 'addr', this.$route.params.address);
         this.addressData = await ton.findAddressData(this.$route.params.address);
         if (null === this.addressData) {
           throw 'Address was not found.';

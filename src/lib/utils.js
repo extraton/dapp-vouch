@@ -11,6 +11,9 @@ export default {
   convertViewFromNano(nanoAmount) {
     return new BigNumber(nanoAmount).dividedBy(new BigNumber('1000000000')).toFormat(3);
   },
+  toNano(amount) {
+    return new BigNumber(amount).multipliedBy(new BigNumber('1000000000')).toString();
+  },
   stringNumberToHex(str) {
     return '0x'+(new BigNumber(str).toString(16).toUpperCase());
   },

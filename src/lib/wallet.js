@@ -10,7 +10,7 @@ export default {
     const transactions = (await ton.runTvm(abi, boc, getCustodiansMessage.message)).transactions;
     for (const transaction of transactions) {
       transaction.isConfirming = false;
-      if (null !== pub) {
+      if (null !== pub && null !== custodianIndex) {
         const input = {mask: transaction.confirmationsMask, index: custodianIndex};
         const isConfirmedMessage = await ton.encodeGetMessage(abi, address, 'isConfirmed', input);
         transaction.isConfirmedByMe = (await ton.runTvm(abi, boc, isConfirmedMessage.message)).confirmed;
@@ -23,6 +23,11 @@ export default {
   async confirmTransaction(address, txid) {
     const wallet = await ton.getWallet(address);
     const contractMessageProcessing = await wallet.confirmTransaction(txid);
+    await contractMessageProcessing.wait();
+  },
+  async submitTransaction(from, to, amount) {
+    const wallet = await ton.getWallet(from);
+    const contractMessageProcessing = await wallet.transfer(to, amount, false);
     await contractMessageProcessing.wait();
   }
 }

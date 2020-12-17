@@ -8,7 +8,7 @@
                       :rules="[rules.required, rules.address]"
                       style="margin-top:15px"
                       outlined/>
-        <v-btn @click="open" color="primary">
+        <v-btn @click="open" color="primary" type="submit">
           open
         </v-btn>
       </v-form>

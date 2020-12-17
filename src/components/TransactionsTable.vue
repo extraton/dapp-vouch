@@ -9,8 +9,10 @@
     hide-default-footer
   >
     <template slot="top">
-      <v-toolbar flat>
+      <v-toolbar flat dense>
         <v-toolbar-title>Pending transactions</v-toolbar-title>
+        <v-spacer></v-spacer>
+        <create-transaction-dialog @afterCreate="$emit('afterCreate')" :multisig-address="address"/>
       </v-toolbar>
     </template>
     <template slot="item" slot-scope="props">
@@ -47,10 +49,11 @@
 import utils from "@/lib/utils";
 import Addr from "@/components/Addr";
 import InstallExtension from "@/components/InstallExtension";
+import CreateTransactionDialog from "@/components/CreateTransactionDialog";
 import wallet from "@/lib/wallet";
 
 export default {
-  components: {Addr, InstallExtension},
+  components: {Addr, InstallExtension, CreateTransactionDialog},
   props: {items: Array, iCustodian: Boolean, extensionAvailable: Boolean, address: String},
   data: () => ({
     utils,
