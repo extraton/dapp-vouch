@@ -2,7 +2,7 @@ import BigNumber from "bignumber.js";
 
 export default {
   isAddressValid(address) {
-    return address.match(/^(-1|0):[a-f0-9]{64}$/g) !== null;
+    return address.match(/^(-1|0):[a-fA-F0-9]{64}$/g) !== null;
   },
   addressToView(address) {
     const upperCaseAddress = address.toUpperCase();

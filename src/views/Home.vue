@@ -31,7 +31,7 @@ export default {
   methods: {
     open() {
       if (this.$refs.form.validate()) {
-        this.$router.push({name: 'wallet', params: {address: this.address}});
+        this.$router.push({name: 'wallet', params: {address: this.address.toLowerCase()}});
       }
     }
   },
