@@ -9,3 +9,5 @@ yarn install
 yarn run build
 docker build -f ../deploy/Dockerfile -t docker.pkg.github.com/extraton/dapp-vouch/dapp-vouch-nginx:${1}  .
 docker push docker.pkg.github.com/extraton/dapp-vouch/dapp-vouch-nginx:${1}
+cd ../
+rm -rf build

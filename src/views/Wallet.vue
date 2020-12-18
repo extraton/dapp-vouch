@@ -36,7 +36,7 @@
       </v-card-text>
     </v-card>
 
-    <transactions-table v-if="!loading && null !== contract"
+    <transactions-table v-if="!loading && null !== contract && null === globalError"
                         @afterConfirm="load"
                         @afterCreate="load"
                         :address="$route.params.address"
@@ -110,11 +110,17 @@ export default {
         if (null === this.addressData) {
           throw 'Address was not found.';
         }
-        this.contract = walletContract.findContractByHash(this.addressData.code_hash);
-        if (null === this.contract) {
-          throw 'This address does not contain supported wallet contract.';
+        // this.contract = walletContract.findContractByHash(this.addressData.code_hash);
+        this.contract = walletContract.getDefault();
+        // if (null === this.contract) {
+        //   throw 'This address does not contain supported wallet contract.';
+        // }
+        let custodians;
+        try {
+          custodians = await wallet.getCustodians(this.contract.abi, this.$route.params.address, this.addressData.boc);
+        } catch (e) {
+          throw 'Error during custodians check. Probably that\'s not a wallet contract.';
         }
-        const custodians = await wallet.getCustodians(this.contract.abi, this.$route.params.address, this.addressData.boc);
         await this.setAmICustodian(custodians);
         this.transactions = await wallet.getTransactions(this.contract.abi, this.$route.params.address, this.addressData.boc, this.publicKey, this.custodianIndex);
         this.addToInfoTable('Contract', 'text', this.contract.name);

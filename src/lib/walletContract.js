@@ -19,4 +19,5 @@ export default {
     return null;
   },
   getAll: () => _.contracts,
+  getDefault: () => _.contracts[0],
 }
