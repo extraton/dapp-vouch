@@ -123,7 +123,7 @@ export default {
         }
         await this.setAmICustodian(custodians);
         this.transactions = await wallet.getTransactions(this.contract.abi, this.$route.params.address, this.addressData.boc, this.publicKey, this.custodianIndex);
-        this.addToInfoTable('Contract', 'text', this.contract.name);
+        // this.addToInfoTable('Contract', 'text', this.contract.name);
         this.addToInfoTable('Custodians', 'text', custodians.length);
         if (null === this.amICustodian) {
           this.addToInfoTable('Am I Custodian?', 'install');
