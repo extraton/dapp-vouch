@@ -112,7 +112,7 @@ export default {
         }
         this.contract = walletContract.findContractByHash(this.addressData.code_hash);
         if (null === this.contract) {
-          throw 'This address is not a wallet.';
+          throw 'This address does not contain supported wallet contract.';
         }
         const custodians = await wallet.getCustodians(this.contract.abi, this.$route.params.address, this.addressData.boc);
         await this.setAmICustodian(custodians);

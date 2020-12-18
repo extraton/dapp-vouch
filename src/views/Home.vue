@@ -2,6 +2,7 @@
   <v-card class="home">
     <v-card-title>Open multi-signature wallet</v-card-title>
     <v-card-text class="text-center">
+      <div class="text-left"><router-link :to="{name: 'about'}">Supported contracts</router-link></div>
       <v-form @submit="open" onSubmit="return false;" v-model="valid" ref="form">
         <v-text-field v-model="address"
                       label="Address"

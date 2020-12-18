@@ -24,12 +24,28 @@
         <br/>Put wallet address in main page and press "open".
         <br/>Now you can securely initiate transaction and confirm them.
       </div>
+
+
+      <div class="about__contracts">
+        <h3>Supported contracts</h3>
+        <ul>
+          <li v-for="(item, i) in walletContract.getAll()" :key="i">
+            <a :href="item.github" target="_blank">{{ item.name }}</a>
+          </li>
+        </ul>
+      </div>
     </v-card-text>
   </v-card>
 </template>
 
 <script>
-export default {}
+import walletContract from "@/lib/walletContract";
+
+export default {
+  data: () => ({
+    walletContract,
+  }),
+}
 </script>
 
 <style lang="scss">
