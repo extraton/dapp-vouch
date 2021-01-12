@@ -16,7 +16,9 @@
                   <template v-if="item.type==='addr'">
                     <addr :address="item.value"/>
                   </template>
-                  <template v-else-if="item.type==='install'"><install-extension/></template>
+                  <template v-else-if="item.type==='install'">
+                    <install-extension/>
+                  </template>
                   <template v-else-if="item.type==='green'">
                     <span class="green--text">{{ item.value }}</span>
                   </template>
@@ -73,7 +75,10 @@ export default {
     isExtensionAvailable: false,
   }),
   mounted() {
-    this.load();
+    this.loading = true;
+    setTimeout(function () {
+      this.load();
+    }.bind(this), 500);
   },
   methods: {
     addToInfoTable(name, type, value = null) {
@@ -119,6 +124,7 @@ export default {
         try {
           custodians = await wallet.getCustodians(this.contract.abi, this.$route.params.address, this.addressData.boc);
         } catch (e) {
+          console.error(e);
           throw 'Error during custodians check. Probably that\'s not a wallet contract.';
         }
         await this.setAmICustodian(custodians);
