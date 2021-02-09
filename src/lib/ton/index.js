@@ -4,7 +4,7 @@ import semver from "semver";
 import freeton from "freeton";
 
 libWebSetup({
-  binaryURL: "/tonclient_1.4.1.wasm",
+  binaryURL: "/tonclient_1.6.3.wasm",
 });
 TonClient.useBinaryLibrary(libWeb);
 
