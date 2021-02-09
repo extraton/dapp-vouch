@@ -5,7 +5,7 @@
     :mobile-breakpoint="100"
     :items-per-page="1000"
     class="transactionsTable"
-    no-data-text="Pending transactions is missing"
+    no-data-text="Pending transactions are missing"
     hide-default-footer
   >
     <template slot="top">

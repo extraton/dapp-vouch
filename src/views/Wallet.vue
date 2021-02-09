@@ -141,7 +141,9 @@ export default {
         this.addToInfoTable('Balance', 'text', utils.convertViewFromNano(this.addressData.balance) + ' TON');
       } catch (e) {
         console.error(e);
-        this.globalError = e.toString();
+        this.globalError = typeof e.message === 'string'
+          ? e.message
+          : e.toString();
       } finally {
         this.loading = false;
       }
